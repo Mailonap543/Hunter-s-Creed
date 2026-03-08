@@ -1,2 +1,2 @@
-# Projeto-Hunter
+# Hunter’s Creed
 jogo baseado em RPG
