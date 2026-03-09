@@ -16,44 +16,42 @@
 			"root": "",
 			"sourceRoot": "src",
 			"prefix": "app",
-			"architect": {
+			"targets": {
 				"build": {
-					"builder": "ngx-build-plus:browser",
+					"builder": "@angular-architects/native-federation:build",
+					"options": {},
+					"configurations": {
+						"production": {
+							"target": "rpg-Projeto-Hunter:esbuild:production"
+						},
+						"development": {
+							"target": "rpg-Projeto-Hunter:esbuild:development",
+							"dev": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"esbuild": {
+					"builder": "@angular-devkit/build-angular:application",
 					"options": {
 						"tsConfig": "tsconfig.app.json",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							{
-								"glob": "**/*",
-								"input": "public",
-								"output": "."
-							}
-						],
-						"styles": [
-							"src/styles.scss"
-						],
-						"main": "src/main.ts",
-						"outputPath": "dist/rpg-Projeto-Hunter",
-						"index": "src\\index.html",
-						"extraWebpackConfig": "webpack.config.js",
-						"commonChunk": false
+						"inlineStyleLanguage": "scss"
 					},
 					"configurations": {
 						"production": {
 							"budgets": [
 								{
 									"type": "initial",
-									"maximumWarning": "500kB",
-									"maximumError": "1MB"
+									"maximumWarning": "2MB",
+									"maximumError": "5MB"
 								},
 								{
 									"type": "anyComponentStyle",
-									"maximumWarning": "4kB",
-									"maximumError": "8kB"
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
 								}
 							],
-							"outputHashing": "all",
-							"extraWebpackConfig": "webpack.prod.config.js"
+							"outputHashing": "all"
 						},
 						"development": {
 							"optimization": false,
@@ -64,22 +62,31 @@
 					"defaultConfiguration": "production"
 				},
 				"serve": {
-					"builder": "ngx-build-plus:dev-server",
+					"builder": "@angular-architects/native-federation:build",
+					"options": {
+						"target": "rpg-Projeto-Hunter:esbuild:development",
+						"rebuildDelay": 0,
+						"dev": true,
+						"port": 4200
+					},
 					"configurations": {
-						"production": {
-							"buildTarget": "rpg-Projeto-Hunter:build:production",
-							"extraWebpackConfig": "webpack.prod.config.js"
-						},
 						"development": {
-							"buildTarget": "rpg-Projeto-Hunter:build:development"
+							"buildTarget": "rpg-Projeto-Hunter:esbuild:development"
 						}
 					},
-					"defaultConfiguration": "development",
-					"options": {
-						"port": 4200,
-						"publicHost": "http://localhost:4200",
-						"extraWebpackConfig": "webpack.config.js"
-					}
+					"defaultConfiguration": "development"
+				},
+				"serve-original": {
+					"builder": "@angular-devkit/build-angular:dev-server",
+					"configurations": {
+						"production": {
+							"buildTarget": "rpg-Projeto-Hunter:esbuild:production"
+						},
+						"development": {
+							"buildTarget": "rpg-Projeto-Hunter:esbuild:development"
+						}
+					},
+					"defaultConfiguration": "development"
 				},
 				"test": {
 					"builder": "@angular/build:unit-test"
