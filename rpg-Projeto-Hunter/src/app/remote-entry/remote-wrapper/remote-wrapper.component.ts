@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-remote-wrapper',
-  
-  template: '<div #reactRoot></div>', 
+  standalone: false,
+  template: '<div #reactRoot></div>',
   styles: ['']
 })
 export class RemoteWrapperComponent implements OnDestroy {

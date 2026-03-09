@@ -1,0 +1,51 @@
+<div class="game-container">
+  <canvas #gameCanvas class="game-canvas"></canvas>
+  
+  <div class="hud">
+    <div class="hearts">
+      <span class="heart" *ngFor="let h of getHearts()" [class.lost]="!h">♥</span>
+    </div>
+    <div class="score">Pontos: {{ gameState.score }}</div>
+    <div class="phase">Fase: {{ gameState.phase }}</div>
+  </div>
+  
+  <div class="yokai-name" *ngIf="gameState.currentYokai">
+    {{ gameState.currentYokai.name }}
+  </div>
+  
+  <div class="question-panel" *ngIf="gameState.currentQuestion && !showExplanation">
+    <div class="question-text">{{ gameState.currentQuestion.question }}</div>
+    <div class="options">
+      <button 
+        *ngFor="let opt of gameState.currentQuestion.options; let i = index"
+        class="option-btn"
+        (click)="selectAnswer(i)">
+        {{ opt }}
+      </button>
+    </div>
+  </div>
+  
+  <div class="explanation-panel" *ngIf="showExplanation">
+    <div class="explanation-title">Explicação</div>
+    <div class="explanation-text">{{ explanationText }}</div>
+    <button class="continue-btn" (click)="nextQuestion()">Continuar</button>
+  </div>
+  
+  <div class="voice-panel" *ngIf="showVoiceUI">
+    <div class="voice-title">Pratique o Japonês</div>
+    <div class="voice-text">{{ voiceText || 'Pressione o botão e fale' }}</div>
+    <button 
+      class="mic-btn" 
+      [class.listening]="isListening"
+      (click)="startListening()">
+      🎤 {{ isListening ? 'Ouvindo...' : 'Falar' }}
+    </button>
+  </div>
+  
+  <div class="narrator" *ngIf="gameState.isPlaying">
+    <div class="narrator-avatar">🧙‍♀️</div>
+    <div class="narrator-text">Derrote os yokais respondendo corretamente!</div>
+  </div>
+  
+  <button class="menu-btn" (click)="returnToMenu()">Menu</button>
+</div>

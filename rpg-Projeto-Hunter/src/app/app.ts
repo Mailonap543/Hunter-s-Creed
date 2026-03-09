@@ -8,5 +8,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('rpg-Projeto-Hunter');
+  protected readonly title = signal('Shadow Code - Fullstack Hunter');
 }

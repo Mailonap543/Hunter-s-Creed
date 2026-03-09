@@ -1,0 +1,47 @@
+<div class="game-over-container">
+  <div class="background-effects">
+    <div class="smoke"></div>
+  </div>
+  
+  <div class="content">
+    <div class="result-icon" [class.victory]="isVictory">
+      {{ isVictory ? '🏆' : '💀' }}
+    </div>
+    
+    <h1 class="title" [class.victory]="isVictory">
+      {{ isVictory ? 'Vitória!' : 'Game Over' }}
+    </h1>
+    
+    <div class="stats">
+      <div class="stat-item">
+        <span class="label">Fase</span>
+        <span class="value">{{ phase }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="label">Pontuação</span>
+        <span class="value">{{ score }}</span>
+      </div>
+    </div>
+    
+    <div class="message">
+      <p *ngIf="!isVictory">Os yokais foram fortes demais...</p>
+      <p *ngIf="isVictory">Você provou ser um verdadeiro caçador!</p>
+    </div>
+    
+    <div class="buttons">
+      <button class="play-again-btn" (click)="playAgain()">
+        Jogar Novamente
+      </button>
+      <button class="menu-btn" (click)="returnToMenu()">
+        Voltar ao Menu
+      </button>
+    </div>
+  </div>
+  
+  <div class="narrator">
+    <div class="narrator-avatar">🧙‍♀️</div>
+    <div class="narrator-text">
+      {{ isVictory ? 'Increível! Você derrotou todos os yokais!' : 'Não desista! Tente novamente.' }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@angular-architects/module-federation": "^21.2.1"
+  }
+}
